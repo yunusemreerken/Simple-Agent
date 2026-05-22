@@ -39,8 +39,8 @@ Yeni agent eklemek 3 adım: yaz → graph'a ekle → router'a route ekle.
 ## Kurulum
 
 ```bash
-git clone https://github.com/kullanici/proje-adi.git
-cd proje-adi
+git clone https://github.com/yunusemreerken/Simple-Agent.git
+cd Simple-Agent
 
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
