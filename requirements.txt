@@ -1,0 +1,23 @@
+# Multi-Agent System — Python dependencies
+# Install with: pip install -r requirements.txt
+
+# Core LLM & agent orchestration
+anthropic==0.49.0
+langchain==0.3.25
+langchain-anthropic==0.3.12
+langchain-core==0.3.59
+langchain-community==0.3.23
+langgraph==0.4.5
+
+# Environment management
+python-dotenv==1.1.0
+
+# HTTP client (used internally by Anthropic SDK)
+httpx==0.28.1
+
+# Typing backport (required for TypedDict features on Python 3.11)
+typing-extensions==4.13.2
+
+# Optional: web search provider (uncomment the one you choose)
+# tavily-python==0.5.0          # Tavily Search
+# google-search-results==2.4.2  # SerpAPI
