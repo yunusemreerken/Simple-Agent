@@ -35,7 +35,7 @@ Requirements:
 - LangGraph for agent orchestration
 - LangChain for LLM integration
 - python-dotenv for environment management
-- Use Claude (Anthropic) as the LLM
+- Use HuggengFace as the LLM
 
 Rules:
 - Every file must have correct imports and placeholder implementations
