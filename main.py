@@ -9,7 +9,7 @@ import os
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 
-# Load .env before any LangChain/Anthropic imports that read env vars
+# Load .env before importing modules that read HuggingFace settings.
 load_dotenv()
 
 from graph import graph  # noqa: E402  (import after env is loaded)
@@ -21,7 +21,7 @@ from graph import graph  # noqa: E402  (import after env is loaded)
 
 def _validate_env() -> None:
     """Raises EnvironmentError if required environment variables are missing."""
-    required = ["ANTHROPIC_API_KEY"]
+    required = ["HF_MODEL_NAME"]
     missing = [key for key in required if not os.getenv(key)]
     if missing:
         raise EnvironmentError(
