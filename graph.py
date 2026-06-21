@@ -32,6 +32,7 @@ def route_by_intent(state: State) -> str:
     routing_map = {
         "support": "support_agent",
         "freelance": "freelance_agent",
+        "unknown": "support_agent",
     }
 
     return routing_map.get(intent, END)
