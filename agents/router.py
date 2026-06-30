@@ -45,6 +45,26 @@ User: "What is the weather today?"                      → unknown
 # ---------------------------------------------------------------------------
 
 VALID_INTENTS = {"freelance", "unknown"}
+FREELANCE_KEYWORDS = {
+    "proposal",
+    "cover letter",
+    "bid",
+    "upwork",
+    "freelance",
+    "client",
+}
+JOB_CONTEXT_KEYWORDS = {
+    "developer",
+    "automation",
+    "scrape",
+    "scraping",
+    "csv",
+    "excel",
+    "report",
+    "reports",
+    "workflow",
+    "project",
+}
 
 
 def _extract_intent(raw_output: str) -> str:
@@ -96,14 +116,21 @@ def router_agent(state: State) -> dict:
 
     logger.debug("Router classifying message: %s", user_message[:120])
 
-    # Call the local LLM
-    llm = get_llm()
-    prompt = [
-        SystemMessage(content=ROUTER_SYSTEM_PROMPT),
-        HumanMessage(content=user_message),
-    ]
+    normalized_message = user_message.lower()
+    if any(keyword in normalized_message for keyword in FREELANCE_KEYWORDS):
+        return {"intent": "freelance"}
+    if "developer" in normalized_message and any(
+        keyword in normalized_message for keyword in JOB_CONTEXT_KEYWORDS
+    ):
+        return {"intent": "freelance"}
 
     try:
+        # Call the local LLM
+        llm = get_llm()
+        prompt = [
+            SystemMessage(content=ROUTER_SYSTEM_PROMPT),
+            HumanMessage(content=user_message),
+        ]
         response = llm.invoke(prompt)
         raw_output = response.content if hasattr(response, "content") else str(response)
     except Exception as exc:

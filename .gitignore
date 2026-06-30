@@ -38,3 +38,6 @@ Thumbs.db
 # ── LangGraph / LangSmith local state ────────────────────────────────────────
 .langgraph/
 langsmith_cache/
+
+# ── Generated outputs ────────────────────────────────────────────────────────
+outputs/

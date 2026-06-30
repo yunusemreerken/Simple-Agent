@@ -41,15 +41,14 @@ def support_agent(state: State) -> dict:
     Returns:
         A partial state update dict containing the updated messages list.
     """
-    llm = get_llm()
-
-    messages = [SystemMessage(content=SUPPORT_SYSTEM_PROMPT)] + state["messages"]
-
     try:
+        llm = get_llm()
+        messages = [SystemMessage(content=SUPPORT_SYSTEM_PROMPT)] + state["messages"]
         response = llm.invoke(messages)
     except Exception as exc:
         error_text = f"Support agent error: {exc}"
         fallback = AIMessage(content=error_text)
         return {"messages": [fallback]}
 
-    return {"messages": [response]}
+    response_text = response.content if hasattr(response, "content") else str(response)
+    return {"messages": [AIMessage(content=response_text)]}
